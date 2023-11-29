@@ -1,0 +1,23 @@
+2 option selecteable who affects to an if and the if displays diferent inputs for them
+2 pages 1 for registrer and other for login
+
+an if that makes a query to de database and search usernames with the same name and it tells you if that is 
+already took
+
+
+
+P project
+R Rickety's
+U university
+D display / dreamy
+
+prud=prescise
+
+Dormant: Inactive or temporarily suspended, as in a dormant volcano or a dormant student account1.
+Diverse: Having variety or difference, as in a diverse student body or a diverse curriculum2.
+Deduce: To infer or conclude from evidence or reasoning, as in deducing the answer to a problem or deducing the main idea of a text3.
+Debate: To argue or discuss a topic formally or informally, as in a debate club or a debate between friends.
+Diplomatic: Having tact and skill in dealing with people or situations, as in a diplomatic response or a diplomatic negotiation.
+
+a university campus with an arch bridge over a small river; during evening sunset; long exposure
+
