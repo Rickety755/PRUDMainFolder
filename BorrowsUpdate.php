@@ -16,9 +16,13 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 70px; margin-left: 10%; margin-right: 10%;
+            margin-top: 120px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
+        }
+        
+        .LibBtn {
+            color: gold;
         }
 
         .LibDiv1 {
@@ -58,7 +62,9 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
-    $query = "SELECT * FROM books";
+    $CodeUpdating = $_POST['BorrowUpdate'] ? $_POST['BorrowUpdate'] : 0;
+
+    $query = "SELECT * FROM borrows WHERE BorrowCode = $CodeUpdating";
 
     $result = $conexion->query($query);
 
@@ -72,25 +78,28 @@
 <center>
         <table class="LibTable">
             <tr>
+                <th>Codigo de prestamo</th>
+                <th>Codigo de usuario</th>
                 <th>Codigo de libro</th>
-                <th>Titulo</th>
-                <th>Cantidad de hojas</th>
-                <th>Editorial</th>
-                <th>Codigo de ejemplar</th>
-                <th>Numero de volumen</th>
+                <th>Fecha de salida</th>
+                <th>Dias para entregar</th>
+                <th>Entregado</th>
             </tr>
+            <form action="BorrowsQuery.php" method="POST">
             <?php
-            while ($row = $result->fetch_assoc()) {
+            while ($CodeUpdating = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row['BookCode'] . "</td>";
-                echo "<td>" . $row['Title'] . "</td>";
-                echo "<td>" . $row['Pages'] . "</td>";
-                echo "<td>" . $row['Editorial'] . "</td>";
-                echo "<td>" . $row['BookNumber'] . "</td>";
-                echo "<td>" . $row['TomeNumber'] . "</td>";
+                    echo "<td>" . $CodeUpdating['BorrowCode'] . "</td>";
+                    echo "<td><input type='number' id='User' value='" . $CodeUpdating['User'] . "' name='User' required></td>";
+                    echo "<td><input type='number' id='BookCode' value='" . $CodeUpdating['BookCode'] . "' name='BookCode' required></td>";
+                    echo "<td><input type='date' id='BorrowDate' value='" . $CodeUpdating['BorrowDate'] . "' name='BorrowDate' required></td>";
+                    echo "<td><input type='number' id='DeliverTimeDays' value='" . $CodeUpdating['DeliverTimeDays'] . "' name='DeliverTimeDays' required></td>";
+                    echo "<td><input type='number' id='Delivered' value='" . $CodeUpdating['Delivered'] . "' name='Delivered' required></td>";
+                    echo "<td> <button class='submit' value='" . $CodeUpdating['BorrowCode'] . "' name='BorrowUpdated'>Update</button></td>";
                 echo "</tr>";
             }
             ?>
+            </form>
         </table>
     </center>
     <br>

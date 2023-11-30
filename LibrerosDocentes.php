@@ -16,9 +16,13 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 70px; margin-left: 10%; margin-right: 10%;
+            margin-top: 120px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
+        }
+        
+        .LibBtn {
+            color: gold;
         }
 
         .LibDiv1 {
@@ -88,13 +92,17 @@
                 echo "<td>" . $row['Editorial'] . "</td>";
                 echo "<td>" . $row['BookNumber'] . "</td>";
                 echo "<td>" . $row['TomeNumber'] . "</td>";
+                echo "<td class='LibBtn'> <div> <form action='LibrerosDocentesQuery.php' method='POST'> <button class='submit' value='" . $row['BookCode'] . "' name='BookEliminar'>Borrar</button> </form> 
+            <form action='LibrerosDocentesUpdate.php' method='POST'> <button class='submit' value='" . $row['BookCode'] . "' name='BookUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
             }
             ?>
         </table>
     </center>
     <br>
-        <center><a href="LibrerosDocentes.php"><button class="CamBtn">Modificar base de datos</button></a></center><br>
+    <center><a href="LibrerosDocentesAltas.php"><button class="CamBtn">Ingresar un nuevo libro</button></a></center><br>
+    <br>
+        
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

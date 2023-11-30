@@ -16,9 +16,13 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 70px; margin-left: 10%; margin-right: 10%;
+            margin-top: 120px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
+        }
+        
+        .LibBtn {
+            color: gold;
         }
 
         .LibDiv1 {
@@ -58,7 +62,9 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
-    $query = "SELECT * FROM books";
+    $CodeUpdating = $_POST['BookUpdate'] ? $_POST['BookUpdate'] : 0;
+
+    $query = "SELECT * FROM books WHERE BookCode = $CodeUpdating";
 
     $result = $conexion->query($query);
 
@@ -79,18 +85,21 @@
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
+            <form action="LibrerosDocentesQuery.php" method="POST">
             <?php
-            while ($row = $result->fetch_assoc()) {
+            while ($CodeUpdating = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row['BookCode'] . "</td>";
-                echo "<td>" . $row['Title'] . "</td>";
-                echo "<td>" . $row['Pages'] . "</td>";
-                echo "<td>" . $row['Editorial'] . "</td>";
-                echo "<td>" . $row['BookNumber'] . "</td>";
-                echo "<td>" . $row['TomeNumber'] . "</td>";
+                    echo "<td>" . $CodeUpdating['BookCode'] . "</td>";
+                    echo "<td><input type='text' id='Title' value='" . $CodeUpdating['Title'] . "' name='Title' required></td>";
+                    echo "<td><input type='number' id='Pages' value='" . $CodeUpdating['Pages'] . "' name='Pages' required></td>";
+                    echo "<td><input type='text' id='Editorial' value='" . $CodeUpdating['Editorial'] . "' name='Editorial' required></td>";
+                    echo "<td><input type='number' id='BookNumber' value='" . $CodeUpdating['BookNumber'] . "' name='BookNumber' required></td>";
+                    echo "<td><input type='number' id='TomeNumber' value='" . $CodeUpdating['TomeNumber'] . "' name='TomeNumber' required></td>";
+                    echo "<td> <button class='submit' value='" . $CodeUpdating['BookCode'] . "' name='BookUpdated'>Update</button></td>";
                 echo "</tr>";
             }
             ?>
+            </form>
         </table>
     </center>
     <br>

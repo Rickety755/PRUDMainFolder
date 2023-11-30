@@ -16,9 +16,13 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 70px; margin-left: 10%; margin-right: 10%;
+            margin-top: 120px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
+        }
+        
+        .LibBtn {
+            color: gold;
         }
 
         .LibDiv1 {
@@ -45,52 +49,26 @@
 </head>
 <body>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ------------------------------------------------------------------------------ -->
-    <?php
-    $DATABASE_HOST = "localhost";
-    $DATABASE_USER = "root";
-    $DATABASE_PASS = "";
-    $DATABASE_NAME = "prud";
-
-    $conexion = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-
-    if ($conexion->connect_error) {
-        die("Connection failed: " . $conexion->connect_error);
-    }
-
-    $query = "SELECT * FROM books";
-
-    $result = $conexion->query($query);
-
-    if (!$result) {
-        die("Query failed: " . $conexion->error);
-    }
-
-    $conexion->close();
-    ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!-- ------------------------------------------------------------------------------------------------- -->
 <center>
         <table class="LibTable">
             <tr>
-                <th>Codigo de libro</th>
                 <th>Titulo</th>
                 <th>Cantidad de hojas</th>
                 <th>Editorial</th>
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
-            <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['BookCode'] . "</td>";
-                echo "<td>" . $row['Title'] . "</td>";
-                echo "<td>" . $row['Pages'] . "</td>";
-                echo "<td>" . $row['Editorial'] . "</td>";
-                echo "<td>" . $row['BookNumber'] . "</td>";
-                echo "<td>" . $row['TomeNumber'] . "</td>";
-                echo "</tr>";
-            }
-            ?>
+            <form action="LibrerosDocentesQuery.php" method="POST"><?php
+            echo "<tr>";
+            echo "<td><input type='text' id='Title' name='Title' required></td>";
+            echo "<td><input type='number' id='Pages' name='Pages' required></td>";
+            echo "<td><input type='text' id='Editorial' name='Editorial' required></td>";
+            echo "<td><input type='number' id='BookNumber' name='BookNumber' required></td>";
+            echo "<td><input type='number' id='TomeNumber' name='TomeNumber' required></td>";
+            echo "<td> <button class='submit' name='send'>Send</button></td>";
+            echo "</tr>";
+        ?></form>
         </table>
     </center>
     <br>

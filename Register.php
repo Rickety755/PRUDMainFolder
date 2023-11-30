@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <style>
         body {
-            background-image: url(LoginBCK.jpg);
+            background-image: url(RegisterBCK.jpg);
             background-size: cover; background-repeat: no-repeat;
             padding: 0;
         }
@@ -66,10 +66,6 @@
         input:hover {
         transition: 1s;
         background-color: #c4c4c4;
-        }
-
-        .JustTrial {
-            background-color: rgb(80, 80, 80);
         }
         
     </style>

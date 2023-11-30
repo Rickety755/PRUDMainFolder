@@ -49,8 +49,8 @@
     
     <div class="LibDiv2"><br>
     <center><p class="CamGeneralTxt">A donde quieres ir?</p><br></center>
-    <center><a href="Library.php"><button class="LibBtn">Explorar los libreros</button></a></center>
-    <center><a href="Library.php"><button class="CamBtn">Libros en prestamo</button></a></center><!-- database of the borrowed books --> 
+    <center><a href="Libreros.php"><button class="LibBtn">Explorar los libreros</button></a></center>
+    <center><a href="Borrows.php"><button class="CamBtn">Libros en prestamo</button></a></center><!-- database of the borrowed books --> 
     <center><a href="Library.php"><button class="CamBtn">Acercarte a la recepcion</button></a></center><!-- then you can ask by a highht of an book to borrow or delete an deliver an borrowed book by an input and it will delete only that one -->
     </div>
 </body>
