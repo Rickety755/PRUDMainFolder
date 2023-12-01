@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <style>
         body {
             background-image: url(LoginBCK.jpg);
@@ -63,7 +65,7 @@
 
         input:hover {
         transition: 1s;
-        background-color: rgb(211, 212, 121);
+        background-color: #c4c4c4;
         }
 
         .JustTrial {
@@ -79,21 +81,41 @@
     <center><form action="Verify.php" method="POST">
     <p>Bienvenido de nuevo!</p>
     <p>Cual es el nombre de tu usuario?</p>
-
-    <input type="text" placeholder="Usuario" name="userinput" id="userinput" required>
+    <input type="text" placeholder="Usuario" name="username" id="username">
 
     <br>
 
     <p>Ingresa tu contraseña aqui!</p>
-    <input type="password" placeholder="Contraseña" name="passinput" id="passinput" required>
+    <input type="password" placeholder="Contraseña" name="pass" id="pass" class="contrasena">
     
     
     
-    <input type="submit" placeholder="Confirmar" value="Confirmar" name="IdxConfirmar">
+    <input type="submit" placeholder="Confirmar" value="Confirmar">
     
 
 
     </form></center>
+    <i class="bi bi-eye-slash" id="togglePassword"></i> <hr>
+    
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+            
+            // toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        // prevent form submit
+        const form = document.querySelector("form");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+</script>
 
 </body>
 </html>

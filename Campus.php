@@ -1,3 +1,4 @@
+<!-- include 'ActualUsuario.php'; -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +66,7 @@
 </head>
 <body>
 <center><div class="CamDiv1"><p class="CamTitle">PRUD</p> <br> <p class="CamSubTitle">Project Rickety's University D</p></div></center>
+
 
 <div class="CamDiv2"><br>
     <center><p class="CamGeneralTxt">A donde quieres ir?</p><br></center>

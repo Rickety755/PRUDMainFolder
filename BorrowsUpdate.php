@@ -65,10 +65,20 @@
     $CodeUpdating = $_POST['BorrowUpdate'] ? $_POST['BorrowUpdate'] : 0;
 
     $query = "SELECT * FROM borrows WHERE BorrowCode = $CodeUpdating";
+    $query2 = "SELECT * FROM users";
+    $query3 = "SELECT * FROM books";
 
     $result = $conexion->query($query);
+    $result2 = $conexion->query($query2);
+    $result3 = $conexion->query($query3);
 
     if (!$result) {
+        die("Query failed: " . $conexion->error);
+    }
+    if (!$result2) {
+        die("Query failed: " . $conexion->error);
+    }
+    if (!$result3) {
         die("Query failed: " . $conexion->error);
     }
 
@@ -90,9 +100,16 @@
             while ($CodeUpdating = $result->fetch_assoc()) {
                 echo "<tr>";
                     echo "<td>" . $CodeUpdating['BorrowCode'] . "</td>";
-                    echo "<td><input type='number' id='User' value='" . $CodeUpdating['User'] . "' name='User' required></td>";
-                    echo "<td><input type='number' id='BookCode' value='" . $CodeUpdating['BookCode'] . "' name='BookCode' required></td>";
-                    echo "<td><input type='date' id='BorrowDate' value='" . $CodeUpdating['BorrowDate'] . "' name='BorrowDate' required></td>";
+                    echo "<td><select name='User' id='User'>"; 
+                    while ($row = $result2->fetch_assoc()) { 
+                        echo "<option value='". $row['User'] ."'>". $row['User'] ."</option>"; 
+                    } 
+                    echo "</select></td>";
+                    echo "<td><select name='BookCode' id='BookCode'>"; 
+                    while ($row = $result3->fetch_assoc()) { 
+                        echo "<option value='". $row['BookCode'] ."'>". $row['BookCode'] ."</option>"; 
+                    } 
+                    echo "</select></td>";                    echo "<td><input type='date' id='BorrowDate' value='" . $CodeUpdating['BorrowDate'] . "' name='BorrowDate' required></td>";
                     echo "<td><input type='number' id='DeliverTimeDays' value='" . $CodeUpdating['DeliverTimeDays'] . "' name='DeliverTimeDays' required></td>";
                     echo "<td><input type='number' id='Delivered' value='" . $CodeUpdating['Delivered'] . "' name='Delivered' required></td>";
                     echo "<td> <button class='submit' value='" . $CodeUpdating['BorrowCode'] . "' name='BorrowUpdated'>Update</button></td>";
@@ -102,6 +119,9 @@
             </form>
         </table>
     </center>
+    
+        
+    
     <br>
         <center><a href="LibrerosDocentes.php"><button class="CamBtn">Modificar base de datos</button></a></center><br>
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>

@@ -28,3 +28,20 @@ borrows altas updates and query
 
 check borrowsQuery query
 borrows options in updating an altas
+
+la cosa:
+-comprueba si esta bien 'verify'
+-llega a este lugar para guardar segun lo qdecia el otro ||checar el inventory update y inventory||
+-nueva pagina con referencia a el usuario con if
+
+cerrar sesion te lo devuelve a 0
+
+<!-- <?php include 'ActualUsuario.php';echo "<p>". $UsuarioActual ."</p>";?> -->
+
+
+database prud
+tables users books borrows 
+
+users usercode user userpassword docente docentepassword 
+books bookcode title folio editorial booknumber tomenumber
+borrows borrowcode borrowdate borrowtimedays userborrowed bookborrowed borrowed
