@@ -16,7 +16,7 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 120px; margin-left: 10%; margin-right: 10%;
+            margin-top: 50px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
         }
@@ -45,11 +45,49 @@
             color: gold;
             margin-top: -95px;
         }
+
+        button {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px; margin-right: 5px; margin-left: 5px;
+        }
+
+        button:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+        }
+
+        .PageTitle {
+            color: aqua;
+            -webkit-text-stroke: black 2px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 25px;
+        }
+
+        .LibBtnAlt {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px; margin-right: 5px; margin-left: 5px;
+        }
+
+        .LibBtnAlt:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+        }
     </style>
 </head>
 <body>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ------------------------------------------------------------------------------ -->
+<br><center><strong><p class='PageTitle'>Libros registrados</p></strong></center>        
+<!-- ------------------------------------------------------------------------------ -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -100,9 +138,9 @@
         </table>
     </center>
     <br>
-    <center><a href="LibrerosDocentesAltas.php"><button class="CamBtn">Ingresar un nuevo libro</button></a></center><br>
+    <center><a href="LibrerosDocentesAltas.php"><button class="LibBtnAlt">Ingresar un nuevo libro</button></a></center><br>
     <br>
         
-        <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
+        <center><a href="Library.php"><button class="LibBtnAlt">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

@@ -119,3 +119,72 @@
 
 </body>
 </html>
+
+<!-- --------------------------------------------------------------------------------------------- -->
+
+<?php
+session_start();
+$DATABASE_HOST = "localhost";
+$DATABASE_USER = "root";
+$DATABASE_PASS = "";
+$DATABASE_NAME = "prud";
+
+$conexion=mysqli_connect($DATABASE_HOST,$DATABASE_USER,$DATABASE_PASS,$DATABASE_NAME);
+if(mysqli_connect_error()){
+
+    exit('ERROR EN LA CONEXION CON LA BD EN MYSQL'.mysqli_connect_error());
+}
+if (isset($_POST["IdxConfirmar"])){
+/* --------------------------------------------------------------------------------------- */
+
+if($stmt = $conexion -> prepare('SELECT User, UserPassword FROM users WHERE User = ?')){
+    $stmt -> bind_param('s', $_POST['userinput']);/* conecta con la seccion de la sentencia "?'" */
+    $stmt -> execute();/* manda la sentencia */
+}
+
+/* -------------------------------------------------------------------------------------- */
+
+/* if ($querydocente = $conexiondocente -> prepare('SELECT Docente FROM users WHERE Docente = 1')) {
+    $_SESSION['Docente'] = true;
+} */
+
+/* --------------------------------busca eso q salio y lo guarda------------------------------------- */
+
+$stmt -> store_result();
+if($stmt-> num_rows>0) {
+$stmt -> bind_result($id,$password);
+$stmt -> fetch();
+} else {
+    header('Location: index.html');
+}
+
+/* -------------------------------------------------------------------------------------------- */
+
+}
+$stmt->close();
+?>
+
+<!-- ------------------------------------------------------------------------------------------------- -->
+
+<?php
+session_start();
+
+// Destruir todas las variables de sesión
+$_SESSION = array();
+
+// Si se desea destruir la sesión, también debe eliminar la cookie de sesión.
+// Nota: Esto destruirá la sesión y no afectará a otras cookies.
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+
+// Finalmente, destruir la sesión.
+session_destroy();
+
+// Redirigir a la página de inicio después de cerrar sesión
+header("Location: ../Index.html");
+?>

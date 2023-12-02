@@ -16,7 +16,7 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 120px; margin-left: 10%; margin-right: 10%;
+            margin-top: 50px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
         }
@@ -45,10 +45,41 @@
             color: gold;
             margin-top: -95px;
         }
+
+        button {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px; margin-right: 5px; margin-left: 5px;
+        }
+
+        button:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+        }
+
+        .LibInput {
+            background-color: #868686;
+            color: #ffffff;
+            border: none; border-radius: 5px;
+            padding: 3px; padding-left: 5px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 13px;
+        }
+
+        .PageTitle {
+            color: aqua;
+            -webkit-text-stroke: black 2px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
+<br><center><strong><p class='PageTitle'>Ingresando nuevo libro</p></strong></center>    
 <!-- ------------------------------------------------------------------------------------------------- -->
 <center>
         <table class="LibTable">
@@ -61,11 +92,11 @@
             </tr>
             <form action="LibrerosDocentesQuery.php" method="POST"><?php
             echo "<tr>";
-            echo "<td><input type='text' id='Title' name='Title' required></td>";
-            echo "<td><input type='number' id='Pages' name='Pages' required></td>";
-            echo "<td><input type='text' id='Editorial' name='Editorial' required></td>";
-            echo "<td><input type='number' id='BookNumber' name='BookNumber' required></td>";
-            echo "<td><input type='number' id='TomeNumber' name='TomeNumber' required></td>";
+            echo "<td><input class='LibInput' type='text' id='Title' name='Title' required></td>";
+            echo "<td><input class='LibInput' type='number' id='Pages' name='Pages' required></td>";
+            echo "<td><input class='LibInput' type='text' id='Editorial' name='Editorial' required></td>";
+            echo "<td><input class='LibInput' type='number' id='BookNumber' name='BookNumber' required></td>";
+            echo "<td><input class='LibInput' type='number' id='TomeNumber' name='TomeNumber' required></td>";
             echo "<td> <button class='submit' name='send'>Send</button></td>";
             echo "</tr>";
         ?></form>

@@ -39,9 +39,15 @@ cerrar sesion te lo devuelve a 0
 <!-- <?php include 'ActualUsuario.php';echo "<p>". $UsuarioActual ."</p>";?> -->
 
 
-database prud
-tables users books borrows 
+borrow use selects and ifs to make it yes or not
 
-users usercode user userpassword docente docentepassword 
-books bookcode title folio editorial booknumber tomenumber
-borrows borrowcode borrowdate borrowtimedays userborrowed bookborrowed borrowed
+.PageTitle {
+            color: aqua;
+            -webkit-text-stroke: black 2px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 25px;
+        }
+
+<br><center><strong><p class='PageTitle'>Libros disponibles</p></strong></center>    
+
+fonteight bold
