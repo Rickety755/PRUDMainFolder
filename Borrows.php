@@ -17,6 +17,7 @@
 
         td {
             padding-left: 10px; padding-left: 10px;
+            text-align: center;
         }
 
         .LibTitle {
@@ -100,10 +101,10 @@
         <table class="LibTable">
             <tr>
                 <th>Codigo de prestamo</th>
-                <th>Codigo de usuario</th>
-                <th>Codigo de libro</th>
                 <th>Fecha de salida</th>
                 <th>Dias para entregar</th>
+                <th>Codigo de usuario</th>
+                <th>Codigo de libro</th>
                 <th>Entregado</th>
             </tr>
             <?php
@@ -114,7 +115,6 @@
                 echo "<td>" . $row['BorrowTimeDays'] . "</td>";
                 echo "<td>" . $row['UserBorrowed'] . "</td>";
                 echo "<td>" . $row['BookBorrowed'] . "</td>";
-                echo "<td>" . $row['Delivered'] . "</td>";
                 if ($row['Delivered']<1) {
                     echo "<td>No</td>";
                 } else {

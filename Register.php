@@ -11,6 +11,7 @@
             background-image: url(RegisterBCK.jpg);
             background-size: cover; background-repeat: no-repeat;
             padding: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
         header {
@@ -27,16 +28,19 @@
         }
 
         form {
-            margin-top: 85px;
+            margin-top: 55px;
             font-size: 25px;
             font-family: "Gill Sans", sans-serif;
             color: #16228a;
             -webkit-text-stroke: #ffffff 1px;
             background-color: rgba(0, 0, 0, 0.479);
-            width: 40%;
             padding-top: 3px; 
             padding-bottom: 10px;
-        
+            width: 40%;
+        }
+
+        p {
+            font-size: 22px;
         }
 
         .IdxDiv1 {
@@ -45,7 +49,7 @@
             height: 80px;
             background-color: rgba(0, 0, 0, 0.479);
             color: white;
-            margin-top: 70px; margin-left: 15%; margin-right: 15%;
+            margin-top: -30px; margin-left: 15%; margin-right: 15%;
             border: none;
             border-radius: 10px;
         }
@@ -60,36 +64,106 @@
         background-color: #272727;
         border: none;
         border-radius: 6px;
-        padding: 8px;       
+        padding: 8px;  
+        -webkit-text-stroke: #ffffff 0px;     
         }
 
-        input:hover {
-        transition: 1s;
-        background-color: #c4c4c4;
+        .RegBtn {
+            color: gold;
+        background-color: #868686;
+        border: none;
+        border-radius: 6px;
+        padding: 8px;  
+        -webkit-text-stroke: #ffffff 0px;     
+        }
+
+        button {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        button:hover {
+            transition: 0.5s;
+            border: #ffffff 1px solid;
+        }
+
+        .RegInput {
+            color: gold;
+        }
+
+        .RegInputAlt {
+            width: 60%;
+            padding: 3px;
+            background-color: #272727;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 5px;
+            font-size: 15px;
+            color: gold;
+        }
+
+        select {
+            color: gold;
+            -webkit-text-stroke: 0px;
         }
         
     </style>
 
 </head>
-<body><br>
+<body>
+<?php
+    $DATABASE_HOST = "localhost";
+    $DATABASE_USER = "root";
+    $DATABASE_PASS = "";
+    $DATABASE_NAME = "prud";
+
+    $conexion = new mysqli($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+
+    if ($conexion->connect_error) {
+        die("Connection failed: " . $conexion->connect_error);
+    }
+    $query = "SELECT * FROM ingenierias";
+
+    $result = $conexion->query($query);
+
+    if (!$result) {
+        die("Query failed: " . $conexion->error);
+    }
+
+    $conexion->close();
+    ?>
+<!-- ------------------------------------------------------------------------------------- -->
     <center><div class="IdxDiv1"><p class="IdxTitle">PRUD</p></div></center>
 
-    <center><form action="Verify.php" method="POST">
-    <p>Bienvenido de nuevo!</p>
-    <p>Cual es el nombre de tu usuario?</p>
-    <input type="text" placeholder="Usuario" name="username" id="username">
+    <center><form action="RegisterQuery.php" method="POST">
+    <p>Bienvenido a PRUD!</p>
+    <p>Cual sera el nombre de tu usuario?</p>
+    <input class="RegInput" type="text" placeholder="Usuario" name="Username" id="Username">
 
     <br>
 
-    <p>Ingresa tu contraseña aqui!</p>
-    <input type="password" placeholder="Contraseña" name="pass" id="pass" class="contrasena">
+    <p>Cual sera tu contraseña?</p>
+    <input class="RegInput" type="password" placeholder="Contraseña" name="Userpassword" id="Userpassword" required> 
     
-    
-    <input type="submit" placeholder="Confirmar" value="Confirmar">
+    <br><p>Y a que ingenieria estas ingresando?</p>
+    <?php
+    echo "<td><select class='RegInputAlt' name='IngenieriaAplicada' id='IngenieriaAplicada'>"; 
+    while ($row = $result->fetch_assoc()) { 
+        echo "<option value='". $row['IngName'] ."'>". $row['IngName'] ."</option>"; 
+    } 
+    echo "</select></td>";
+    ?>
+    <br>
+    <button class='submit' name='Confirmar'>Confirmar</button>
     
 
 
-    </form></center>
+    </form><br>
+    <center><a href="Index.html"><button class="IdxBtn">Ya tenias un usuario? Vuelve al inicio por aqui!</button></a></center>
+</center>
     
 <script>
     const togglePassword = document.querySelector("#togglePassword");

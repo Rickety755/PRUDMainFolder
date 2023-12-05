@@ -16,7 +16,7 @@
             box-shadow: black 0 0 100px;
             width: 80%;
             background-color: rgba(180, 180, 180, 0.479);
-            margin-top: 120px; margin-left: 10%; margin-right: 10%;
+            margin-top: 50px; margin-left: 10%; margin-right: 10%;
             border: none;
             border-radius: 10px;
         }
@@ -79,10 +79,18 @@
             background-color: #c4c4c4;
             border: #ffffff 1px solid;
         }
+
+        .PageTitle {
+            color: aqua;
+            -webkit-text-stroke: black 2px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
+<br><center><strong><p class='PageTitle'>Registrando un prestamo</p></strong></center>    
 <!-- ------------------------------------------------------------------------------------------------- -->
     <?php
     $DATABASE_HOST = "localhost";
@@ -122,20 +130,28 @@
             </tr>
             <form action="BorrowsQuery.php" method="POST"><?php
                 echo "<tr>";
-                    echo "<td><select class='LibInput' name='Username' id='Username'>"; 
+                    echo "<td><select class='LibInput' name='UserBorrowed' id='UserBorrowed'>"; 
+
                     while ($row = $result2->fetch_assoc()) { 
                         echo "<option value='". $row['Username'] ."'>". $row['Username'] ."</option>"; 
                     } 
                     echo "</select></td>";
-                    echo "<td><select class='LibInput' name='BookCode' id='BookCode'>"; 
+
+                    echo "<td><select class='LibInput' name='BookBorrowed' id='BookBorrowed'>"; 
                     while ($row = $result3->fetch_assoc()) { 
                         echo "<option value='". $row['BookCode'] ."'>". $row['BookCode'] ."</option>"; 
                     } 
-                    echo "</select></td>";                    
+                    echo "</select></td>";    
+
                     echo "<td><input class='LibInput' type='date' id='BorrowDate' name='BorrowDate' required></td>";
-                    echo "<td><input class='LibInputAlt' type='number' id='DeliverTimeDays' name='DeliverTimeDays' required></td>";
-                    echo "<td><input class='LibInputAlt' type='number' id='Delivered' name='Delivered' required></td>";
-                    echo "<td> <button class='submit' name='BorrowUpdated'>Update</button></td>";
+                    echo "<td><input class='LibInputAlt' type='number' id='BorrowTimeDays' name='BorrowTimeDays' required></td>";
+                    
+                    echo "<td><select class='LibInputAlt' name='Deliver' id='Deliver'>";
+                    echo "<option value='Si'>Si</option>";
+                    echo "<option value='No'>No</option>";
+                    echo "</select></td>";
+
+                    echo "<td> <button class='submit' name='send'>Update</button></td>";
                 echo "</tr>";
             ?>
             </form>

@@ -85,6 +85,16 @@
             background-color: #c4c4c4;
             border: #ffffff 1px solid;
         }
+
+        .LibInputAlt {
+            width: 80%;
+            padding: 3px;
+            background-color: #868686;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 5px;
+            font-size: 15px;
+            margin-left: 10%; margin-right: 10%;
+        }
     </style>
 </head>
 <body>
@@ -146,19 +156,27 @@
             while ($CodeUpdating = $result->fetch_assoc()) {
                 echo "<tr>";
                     echo "<td style='text-align: center;'>" . $CodeUpdating['BorrowCode'] . "</td>";
-                    echo "<td><select class='LibInput' name='Username' id='Username'>"; 
+
+                    echo "<td><select class='LibInput' name='UserBorrowed' id='UserBorrowed'>"; 
                     while ($row = $result2->fetch_assoc()) { 
                         echo "<option value='". $row['Username'] ."'>". $row['Username'] ."</option>"; 
                     } 
                     echo "</select></td>";
-                    echo "<td><select class='LibInput' name='BookCode' id='BookCode'>"; 
+
+                    echo "<td><select class='LibInput' name='BookBorrowed' id='BookBorrowed'>"; 
                     while ($row = $result3->fetch_assoc()) { 
                         echo "<option value='". $row['BookCode'] ."'>". $row['BookCode'] ."</option>"; 
                     } 
-                    echo "</select></td>";                    
+                    echo "</select></td>";
+
                     echo "<td><input type='date' id='BorrowDate' value='" . $CodeUpdating['BorrowDate'] . "' name='BorrowDate' required></td>";
                     echo "<td><input type='number' id='BorrowTimeDays' value='" . $CodeUpdating['BorrowTimeDays'] . "' name='BorrowTimeDays' required></td>";
-                    echo "<td><input type='number' id='Delivered' value='" . $CodeUpdating['Delivered'] . "' name='Delivered' required></td>";
+
+                    echo "<td><select class='LibInputAlt' name='Deliver' id='Deliver'>";
+                    echo "<option value='Si'>Si</option>";
+                    echo "<option value='No'>No</option>";
+                    echo "</select></td>";
+
                     echo "<td> <button class='submit' value='" . $CodeUpdating['BorrowCode'] . "' name='BorrowUpdated'>Update</button></td>";
                 echo "</tr>";
             }

@@ -51,3 +51,15 @@ borrow use selects and ifs to make it yes or not
 <br><center><strong><p class='PageTitle'>Libros disponibles</p></strong></center>    
 
 fonteight bold
+
+cambiar la cosa inicial q sale en prestamos updates and highs
+
+//TODO buttons in users
+//TODO register index
+
+
+book
+borrow
+user 
+
+hola! puedes hacerme una imagen de una aula universitaria moderna del tamaño de con los asientos en forma de semicirculo con filas de sillas negras?

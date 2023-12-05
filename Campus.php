@@ -88,9 +88,15 @@ session_start();
 
 <div class="CamDiv2"><br>
     <center><p class="CamGeneralTxt">A donde quieres ir?</p><br></center>
+    
     <center><a href="Library.php"><button class="CamBtn">Ir a la Biblioteca</button></a></center>
+    
     <center><a href="Ingenierias.php"><button class="CamBtn">Ir a las ingenierias</button></a></center><!-- a page with info about the ingenierias and his description {a mas informacion button} --> 
-    <center><a href="Students.php"><button class="CamBtn">Ir a los estudiantes</button></a></center><!-- a database of the alumns this is only visible to docentes and they only can modificy them {provisional} -->
+    
+    <?php if ($_SESSION['Docente']==1) {
+    echo "<center><a href='Users.php'><button class='CamBtn'>Ver los usuarios</button></a></center>"; 
+    }?><!-- a database of the alumns this is only visible to docentes and they only can modificy them {provisional} -->
+    
     <br><center><a href="Campus.php"><button class="CamBtnAlt">Volver a el campus</button></a><a href="CloseSession.php"><button class="CamBtnAlt">Cerrar sesion</button></a></center>
 </div>
 

@@ -15,21 +15,23 @@ if ($conexion_register->connect_error) {
 }
 
 // Verificar si se ha enviado el formulario
-if (isset($_POST["Register"])) {
+if (isset($_POST["Confirmar"])) {
 
-    $usuario = $_POST['User'];
-    $password = $_POST['Password'];
-    $mail = 0;
+    $Username = $_POST['Username'];
+    $Userpassword = $_POST['Userpassword'];
+    $Docente = 0;
+    $IngenieriaAplicada = $_POST['IngenieriaAplicada'];
+    
 
     // Consulta SQL para eliminar el registro de manera segura
-    $registerQuery = "INSERT INTO accounts (`usuario`,`password`,`email`)
-    VALUES (?, ?, ?)";
+    $registerQuery = "INSERT INTO users (`Username`,`Userpassword`,`Docente`,`IngenieriaAplicada`)
+    VALUES (?, ?, ?, ?)";
 
     // Preparar la consulta
     $consulta_register = $conexion_register->prepare($registerQuery);
 
     // Vincular el valor del código del producto
-    $consulta_register->bind_param("sss", $usuario, $password, $mail);
+    $consulta_register->bind_param("ssss", $Username, $Userpassword, $Docente, $IngenieriaAplicada);
 
     // Ejecutar la consulta
     if ($consulta_register->execute()) {

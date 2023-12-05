@@ -62,17 +62,22 @@ if (isset($_POST["BorrowUpdate"])) {
 if (isset($_POST["BorrowUpdated"])) {
     // Obtener el código del producto a actualizar
     $BorrowCode = $_POST['BorrowUpdated'];
+    if ($_POST['Deliver']=="Si") {
+        $Delivered = 1;
+    } else {
+        $Delivered = 0;
+    }
 
     // Consulta SQL para actualizar el registro
     $updateQuery =  "UPDATE borrows
-    SET User = ?, BookCode = ?, BorrowDate = ?, DeliverTimeDays = ?, Delivered = ?
+    SET BorrowDate = ?, BorrowTimeDays = ?, UserBorrowed = ?, BookBorrowed = ?, Delivered = ?
     WHERE BorrowCode = ?";
 
     // Preparar la consulta
     $consulta_update = $conexion_update->prepare($updateQuery);
 
     // Vincular los valores a los parámetros de la consulta
-    $consulta_update->bind_param("ssssss", $_POST['User'], $_POST['BookCode'], $_POST['BorrowDate'], $_POST['DeliverTimeDays'], $_POST['Delivered'], $BorrowCode);
+    $consulta_update->bind_param("ssssss", $_POST['BorrowDate'], $_POST['BorrowTimeDays'], $_POST['UserBorrowed'], $_POST['BookBorrowed'], $Delivered, $BorrowCode);
 
     // Ejecutar la consulta
     if ($consulta_update->execute()) {
@@ -91,28 +96,33 @@ if (isset($_POST["BorrowUpdated"])) {
 
 // Verificar si se ha enviado el formulario
 if (isset($_POST["send"])) {
-
-    $User = $_POST['User'];
-    $BookCode = $_POST['BookCode'];
+    
     $BorrowDate = $_POST['BorrowDate'];
-    $DeliverTimeDays = $_POST['DeliverTimeDays'];
-    $Delivered = $_POST['Delivered'];
+    $BorrowTimeDays = $_POST['BorrowTimeDays'];
+    $UserBorrowed = $_POST['UserBorrowed'];
+    $BookBorrowed = $_POST['BookBorrowed'];
+
+    if ($_POST['Deliver']=="Si") {
+        $Delivered = 1;
+    } else {
+        $Delivered = 0;
+    }
 
 
     // Consulta SQL para eliminar el registro de manera segura
-    $insertQuery = "INSERT INTO borrows (`User`,`BookCode`,`BorrowDate`,`DeliverTimeDays`,`Delivered`)
+    $insertQuery = "INSERT INTO borrows (`BorrowDate`,`BorrowTimeDays`,`UserBorrowed`,`BookBorrowed`,`Delivered`)
     VALUES (?, ?, ?, ?, ?)";
 
     // Preparar la consulta
     $consulta_insert = $conexion_insert->prepare($insertQuery);
 
     // Vincular el valor del código del producto
-    $consulta_insert->bind_param("sssss", $User, $BookCode, $BorrowDate, $DeliverTimeDays, $Delivered);
-
+    $consulta_insert->bind_param("sssss", $BorrowDate, $BorrowTimeDays, $UserBorrowed, $BookBorrowed, $Delivered);
+    
     // Ejecutar la consulta
     if ($consulta_insert->execute()) {
         // Registro eliminado con éxito, puedes redirigir a la página deseada
-        header("Location: Borrows.php");
+        header("Location: Library.php");
     }
 
     // Cerrar la declaración

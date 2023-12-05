@@ -13,6 +13,8 @@ session_start();
             background-size: cover;
             color: white;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-position: -300px;
+            background-repeat: no-repeat;
         }
 
         .LibTable {
@@ -26,7 +28,7 @@ session_start();
 
         td {
             text-align: center;
-            padding: 5px;
+            padding: 10px;
         }
 
         .LibDiv1 {
