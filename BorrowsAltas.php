@@ -51,7 +51,7 @@
             padding: 3px;
             background-color: #868686;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            border: none; border-radius: 5px;
+            border: 1px solid black; border-radius: 5px;
             font-size: 15px;
         }
 
@@ -60,7 +60,7 @@
             padding: 3px;
             background-color: #868686;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            border: none; border-radius: 5px;
+            border: 1px solid black; border-radius: 5px;
             font-size: 15px;
             margin-left: 10%; margin-right: 10%;
         }
@@ -86,9 +86,28 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 25px;
         }
+
+        .LibDate {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            position: fixed; top: 0; right: 25px;
+        }
     </style>
 </head>
 <body>
+<?php
+// Script para obtener y mostrar la fecha actual en el documento
+function obtenerFechaActual() {
+    $fecha = new DateTime();
+    $dia = $fecha->format('d');
+    $mes = $fecha->format('m');
+    $año = $fecha->format('Y');
+    return "$dia/$mes/$año";
+}
+
+echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
+?>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
 <br><center><strong><p class='PageTitle'>Registrando un prestamo</p></strong></center>    
 <!-- ------------------------------------------------------------------------------------------------- -->
@@ -126,7 +145,6 @@
                 <th>Codigo de libro</th>
                 <th>Fecha de salida</th>
                 <th>Dias para entregar</th>
-                <th>Entregado</th>
             </tr>
             <form action="BorrowsQuery.php" method="POST"><?php
                 echo "<tr>";
@@ -146,12 +164,8 @@
                     echo "<td><input class='LibInput' type='date' id='BorrowDate' name='BorrowDate' required></td>";
                     echo "<td><input class='LibInputAlt' type='number' id='BorrowTimeDays' name='BorrowTimeDays' required></td>";
                     
-                    echo "<td><select class='LibInputAlt' name='Deliver' id='Deliver'>";
-                    echo "<option value='Si'>Si</option>";
-                    echo "<option value='No'>No</option>";
-                    echo "</select></td>";
 
-                    echo "<td> <button class='submit' name='send'>Update</button></td>";
+                    echo "<td> <button class='submit' name='send'>Send</button></td>";
                 echo "</tr>";
             ?>
             </form>

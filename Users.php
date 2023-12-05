@@ -8,6 +8,7 @@
         body {
             background-image: url(UsersBCK.jpg);
             background-size: cover;
+            background-position: center;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
 
@@ -70,6 +71,44 @@
             background-color: #c4c4c4;
             border: #ffffff 1px solid;
         }
+
+        .SearchBar {
+            background-color: #c4c4c4;
+            border: white 1px solid;
+            border-radius: 10px;
+            color: darkgreen;
+            font-size: 19px;
+            padding: 4px;
+            width: 280px;
+        }
+
+        .SearchBar::placeholder {
+            color: #ffffff;
+        }
+
+        .SearchTxt {
+            color: mediumseagreen;
+            -webkit-text-stroke: black 1px;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .SearchBtn {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .SearchBtn:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +139,14 @@
     $conexion->close();
     ?>
     <!-- ------------------------------------------------------------------------------ -->
+    <?php include 'SearchUsers.php'; ?>
+    <center><div id="Buscador">
+        <form action="Users.php" method="POST">
+            <label class="SearchTxt" for="search">Buscar usuario:</label>
+            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el nombre del usuario">
+            <input class="SearchBtn" type="submit" value="Buscar"></div></center>
+        </form>   
+    <!-- ------------------------------------------------------------------------------- -->
     <center>
         <table class="UsrTable">
             <tr>
@@ -111,6 +158,23 @@
                 <th>Opciones</th>
             </tr>
             <?php
+            if ($seeing = mysqli_query($conexion, $sql_select)) {
+                while ($row = mysqli_fetch_array($seeing)) {
+                echo "<tr>";
+                echo "<td>" . $row['UserCode'] . "</td>";
+                echo "<td>" . $row['Username'] . "</td>";
+                echo "<td>" . $row['Userpassword'] . "</td>";
+                if ($row['Docente']==1) {
+                echo "<td>Docente</td>";
+                } else {
+                echo "<td>Alumno</td>";
+                }
+                echo "<td>" . $row['IngenieriaAplicada'] . "</td>";
+                echo "<td class='UsrBtn'> <div> <form action='UsersQuery.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserEliminar'>Borrar</button> </form> 
+                <form action='UsersUpdate.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserUpdate'>Modificar</button> </form> </div></td>";
+                echo "</tr>";
+            }
+        }    else {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row['UserCode'] . "</td>";
@@ -126,6 +190,7 @@
             <form action='UsersUpdate.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
             }
+        }
             ?>
         </table>
     </center>

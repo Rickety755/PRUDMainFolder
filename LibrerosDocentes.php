@@ -82,6 +82,43 @@
             background-color: #c4c4c4;
             border: #ffffff 1px solid;
         }
+
+        .SearchBar {
+            background-color: #c4c4c4;
+            border: white 1px solid;
+            border-radius: 10px;
+            color: darkgreen;
+            font-size: 19px;
+            padding: 4px;
+        }
+
+        .SearchBar::placeholder {
+            color: #ffffff;
+        }
+
+        .SearchTxt {
+            color: mediumseagreen;
+            -webkit-text-stroke: black 1px;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .SearchBtn {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .SearchBtn:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -111,6 +148,14 @@
     $conexion->close();
     ?>
     <!-- ------------------------------------------------------------------------------ -->
+    <?php include 'SearchBooks.php'; ?>
+    <center><div id="Buscador">
+        <form action="LibrerosDocentes.php" method="POST">
+            <label class="SearchTxt" for="search">Buscar libro:</label>
+            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el folio del libro">
+            <input class="SearchBtn" type="submit" value="Buscar"></div></center>
+        </form>  
+    <!-- ------------------------------------------------------------------------------- -->
 <center>
         <table class="LibTable">
             <tr>
@@ -122,6 +167,23 @@
                 <th>Numero de volumen</th>
             </tr>
             <?php
+            $rowCount = 0;
+            if ($seeing = mysqli_query($conexion, $sql_select)) {
+            while ($row = mysqli_fetch_array($seeing)) {
+                $rowCount++;
+                $BCKX = $rowCount + 200;
+                echo "<tr>";
+                echo "<td>" . $row['BookCode'] . "</td>";
+                echo "<td>" . $row['Title'] . "</td>";
+                echo "<td>" . $row['Pages'] . "</td>";
+                echo "<td>" . $row['Editorial'] . "</td>";
+                echo "<td>" . $row['BookNumber'] . "</td>";
+                echo "<td>" . $row['TomeNumber'] . "</td>";
+                echo "<td class='LibBtn'> <div> <form action='LibrerosDocentesQuery.php' method='POST'> <button class='submit' value='" . $row['BookCode'] . "' name='BookEliminar'>Borrar</button> </form> 
+            <form action='LibrerosDocentesUpdate.php' method='POST'> <button class='submit' value='" . $row['BookCode'] . "' name='BookUpdate'>Modificar</button> </form> </div></td>";
+                echo "</tr>";
+            }
+        } else {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row['BookCode'] . "</td>";
@@ -134,6 +196,7 @@
             <form action='LibrerosDocentesUpdate.php' method='POST'> <button class='submit' value='" . $row['BookCode'] . "' name='BookUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
             }
+        }
             ?>
         </table>
     </center>

@@ -101,12 +101,8 @@ if (isset($_POST["send"])) {
     $BorrowTimeDays = $_POST['BorrowTimeDays'];
     $UserBorrowed = $_POST['UserBorrowed'];
     $BookBorrowed = $_POST['BookBorrowed'];
-
-    if ($_POST['Deliver']=="Si") {
-        $Delivered = 1;
-    } else {
-        $Delivered = 0;
-    }
+    $Delivered = 0;
+    
 
 
     // Consulta SQL para eliminar el registro de manera segura

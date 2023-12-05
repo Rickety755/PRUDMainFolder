@@ -63,3 +63,7 @@ borrow
 user 
 
 hola! puedes hacerme una imagen de una aula universitaria moderna del tamaño de con los asientos en forma de semicirculo con filas de sillas negras?
+
+retry because the see thing in the page was not setted
+
+podria de hecho meter en las query.php pages the search php pages

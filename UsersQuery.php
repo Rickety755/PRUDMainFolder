@@ -62,7 +62,7 @@ if (isset($_POST["UserUpdated"])) {
     $UserCode = $_POST['UserUpdated'];
 
 
-    if ($_POST['Docente']=="Docente") {
+    if ($_POST['Docente']==="Docente") {
         $Docente = 1;
     } else {
         $Docente = 0;
@@ -77,7 +77,7 @@ if (isset($_POST["UserUpdated"])) {
     $consulta_update = $conexion_update->prepare($updateQuery);
 
     // Vincular los valores a los parámetros de la consulta
-    $consulta_update->bind_param("sssss", $_POST['Username'], $_POST['Userpassword'], $_POST['Docente'], $_POST['IngenieriaAplicada'], $UserCode);
+    $consulta_update->bind_param("sssss", $_POST['Username'], $_POST['Userpassword'], $Docente, $_POST['IngenieriaAplicada'], $UserCode);
 
     // Ejecutar la consulta
     if ($consulta_update->execute()) {

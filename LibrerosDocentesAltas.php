@@ -64,7 +64,7 @@
         .LibInput {
             background-color: #868686;
             color: #ffffff;
-            border: none; border-radius: 5px;
+            border: 1px solid black; border-radius: 5px;
             padding: 3px; padding-left: 5px;
             font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 13px;
         }

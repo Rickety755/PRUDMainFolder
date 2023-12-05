@@ -60,7 +60,7 @@
             padding: 3px;
             background-color: #868686;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            border: none; border-radius: 5px;
+            border: 1px solid white; border-radius: 5px;
             font-size: 15px;
             color: white;
         }

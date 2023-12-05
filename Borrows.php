@@ -36,6 +36,7 @@
             background-size: cover;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             color: white;
+            background-position: center;
         }
 
         .LibTable {
@@ -68,9 +69,66 @@
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 25px;
         }
+
+        .SearchBar {
+            background-color: #c4c4c4;
+            border: white 1px solid;
+            border-radius: 10px;
+            color: darkgreen;
+            font-size: 19px;
+            padding: 4px;
+            width: 280px;
+        }
+
+        .SearchBar::placeholder {
+            color: #ffffff;
+        }
+
+        .SearchTxt {
+            color: mediumseagreen;
+            -webkit-text-stroke: black 1px;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .SearchBtn {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .SearchBtn:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+            color: black;
+        }
+
+        .LibDate {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            position: fixed; top: 0; right: 25px;
+        }
     </style>
 </head>
 <body>
+<?php
+// Script para obtener y mostrar la fecha actual en el documento
+function obtenerFechaActual() {
+    $fecha = new DateTime();
+    $dia = $fecha->format('d');
+    $mes = $fecha->format('m');
+    $año = $fecha->format('Y');
+    return "$dia/$mes/$año";
+}
+
+echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
+?>
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
 <br><center><strong><p class='PageTitle'>Prestamos registrados</p></strong></center>    
 <!-- ------------------------------------------------------------------------------ -->
@@ -96,7 +154,15 @@
 
     $conexion->close();
     ?>
-    <!--todo                                                                                                                                                             -->
+    <!-- ------------------------------------------------------------------------------------------------ -->
+    <?php include 'SearchBorrows.php'; ?>
+    <center><div id="Buscador">
+        <form action="Borrows.php" method="POST">
+            <label class="SearchTxt" for="search">Buscar prestamo:</label>
+            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el nombre del usuario">
+            <input class="SearchBtn" type="submit" value="Buscar"></div></center>
+        </form>  
+    <!-- ------------------------------------------------------------------------------------------------- -->
     <center>
         <table class="LibTable">
             <tr>
@@ -108,6 +174,25 @@
                 <th>Entregado</th>
             </tr>
             <?php
+            if ($seeing = mysqli_query($conexion, $sql_select)) {
+            while ($row = mysqli_fetch_array($seeing)) {
+                echo "<tr>";
+                echo "<td>" . $row['BorrowCode'] . "</td>";
+                echo "<td>" . $row['BorrowDate'] . "</td>";
+                echo "<td>" . $row['BorrowTimeDays'] . "</td>";
+                echo "<td>" . $row['UserBorrowed'] . "</td>";
+                echo "<td>" . $row['BookBorrowed'] . "</td>";
+                if ($row['Delivered']<1) {
+                    echo "<td>No</td>";
+                } else {
+                    echo "<td>Si</td>";
+                } 
+                /*echo "<td>" . $row['Delivered'] . "</td>";*/
+                echo "<td class='LibBtn'> <div> <form action='BorrowsQuery.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowEliminar'>Borrar</button> </form> 
+                <form action='BorrowsUpdate.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowUpdate'>Modificar</button> </form> </div></td>";
+                echo "</tr>";
+            }
+        }    else {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row['BorrowCode'] . "</td>";
@@ -125,6 +210,7 @@
                 <form action='BorrowsUpdate.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
             }
+        }
             ?>
         </table>
     </center>

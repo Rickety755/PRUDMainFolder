@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$BCKX = -400;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +15,7 @@ session_start();
             background-size: cover;
             color: white;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background-position: -300px;
+            background-position: center;
             background-repeat: no-repeat;
         }
 
@@ -69,9 +71,46 @@ session_start();
 
         .PageTitle {
             color: aqua;
-            -webkit-text-stroke: black 2px;
+            -webkit-text-stroke: black 1px;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 25px;
+        }
+
+        .SearchBar {
+            background-color: #c4c4c4;
+            border: white 1px solid;
+            border-radius: 10px;
+            color: darkgreen;
+            font-size: 19px;
+            padding: 4px;
+        }
+
+        .SearchBar::placeholder {
+            color: #ffffff;
+        }
+
+        .SearchTxt {
+            color: mediumseagreen;
+            -webkit-text-stroke: black 1px;
+            font-weight: bold;
+            font-size: 23px;
+        }
+
+        .SearchBtn {
+            background-color: #868686;
+            font-size: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: none; border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .SearchBtn:hover {
+            transition: 0.5s;
+            background-color: #c4c4c4;
+            border: #ffffff 1px solid;
+            color: black;
         }
     </style>
 </head>
@@ -102,6 +141,14 @@ session_start();
     $conexion->close();
     ?>
     <!-- ------------------------------------------------------------------------------ -->
+    <?php include 'SearchBooks.php'; ?>
+    <center><div id="Buscador">
+        <form action="Libreros.php" method="POST">
+            <label class="SearchTxt" for="search">Buscar libro:</label>
+            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el titulo del libro">
+            <input class="SearchBtn" type="submit" value="Buscar"></div></center>
+        </form>    
+    <!-- ------------------------------------------------------------------------------ -->
 <center>
         <table class="LibTable">
             <tr>
@@ -113,7 +160,12 @@ session_start();
                 <th>Numero de volumen</th>
             </tr>
             <?php
-            while ($row = $result->fetch_assoc()) {
+            $rowCount = 0;
+            if ($seeing = mysqli_query($conexion, $sql_select)) {
+            
+            while ($row = mysqli_fetch_array($seeing)) {
+                $rowCount++;
+                $BCKX = $rowCount + 200;
                 echo "<tr>";
                 echo "<td>" . $row['BookCode'] . "</td>";
                 echo "<td>" . $row['Title'] . "</td>";
@@ -123,6 +175,24 @@ session_start();
                 echo "<td>" . $row['TomeNumber'] . "</td>";
                 echo "</tr>";
             }
+        } else { 
+            while ($row = $result->fetch_assoc()) {
+                $rowCount++;
+                $BCKX = $rowCount + 200;
+                echo "<style>";
+                echo "body { background-position: <?php echo $BCKX; ?>px 0px; }";
+                echo "</style>";
+
+                echo "<tr>";
+                echo "<td>" . $row['BookCode'] . "</td>";
+                echo "<td>" . $row['Title'] . "</td>";
+                echo "<td>" . $row['Pages'] . "</td>";
+                echo "<td>" . $row['Editorial'] . "</td>";
+                echo "<td>" . $row['BookNumber'] . "</td>";
+                echo "<td>" . $row['TomeNumber'] . "</td>";
+                echo "</tr>";
+            }
+        }
             ?>
         </table>
     </center>
@@ -131,5 +201,7 @@ session_start();
     echo "<center><a href='LibrerosDocentes.php'><button class=\'LibBtn\'>Modificar base de datos</button></a></center><br>";
     }?>
         <center><a href="Library.php"><button class="LibBtn">Volver a la Biblioteca</button></a></center>
+        
+        
 </body>
 </html>
