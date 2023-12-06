@@ -1,57 +1,59 @@
 <?php
+//TODO                Obtenemos el inicio de sesion              
 session_start();
-//credenciales de acceso
+
 $DATABASE_HOST = "localhost";
 $DATABASE_USER = "root";
 $DATABASE_PASS = "";
 $DATABASE_NAME = "prud";
 
-//conexion
 $conexion=mysqli_connect($DATABASE_HOST,$DATABASE_USER,$DATABASE_PASS,$DATABASE_NAME);
-//condicion para verificacion de errores con la bd
+
 if(mysqli_connect_error()){
 
     exit('ERROR EN LA CONEXION CON LA BD EN MYSQL'.mysqli_connect_error());
 }
 
-// validacion de informacion por POST
-
+//TODO                SI los campos de el inicio de sesion estan vacios                     
 if(!isset($_POST['userinput'],$_POST['passinput'])){
-    // si no hay datos , que redireccione
-    header('Location: Campus.html');
-    exit;//es para asegurar de que se detenga la ejecucion del script
+
+        //TODO              Nos dirige de nuevo a la pagina del index                 
+    header('Location: Index.html');
+    exit;
 }
 
-// evita inyeccion de datos en sql, utilizando sentencias preparadas
-
+//TODO                                   Secuencia SQL select                                    
 if($stmt = $conexion -> prepare('SELECT Username, Userpassword, Docente FROM users WHERE Username = ?')){
    
-    //parametros de enlace
-    $stmt -> bind_param('s', $_POST['userinput']);//esta variable me es necesaria para enlazar los parametros que tengo para con sql
+    //TODO   Conecta aquellos campos no especificados de la consulta(= ?) con las variables     
+    $stmt -> bind_param('s', $_POST['userinput']);
     $stmt -> execute();
 }
-// si coinciden los datos introducidos,traerlos
-//almacenar resultados
+
+//TODO             Guardar resultados, comprobar si los resultados coinciden        
 $stmt -> store_result();
 if($stmt-> num_rows>0) {
 $stmt -> bind_result($id,$password,$docente);
 $stmt -> fetch();
-//comprobar si se encontraron resultados
 if($_POST['passinput']===$password){
-//con esto debe mandarnos al menu
+
+//TODO            Creacion de la sesion             
    session_regenerate_id();
    $_SESSION['loggedin']=true;
    $_SESSION['name']=$_POST['userinput'];
    $_SESSION['id']=$id;
    $_SESSION['Docente']=$docente;
    echo '<script> alert("Inicio de sesión exitoso"); </script>';
+
+   //TODO              Nos dirige a la pantalla del campus                 
    header('Location:Campus.php');
    
 } else{
+    //TODO          SI no coincide la contraseña, nos dirige de nuevo a la pagina del index                 
     header('Location:index.html');
 }
 } else{
-   
+    //TODO          SI no hay resultados, nos dirige de nuevo a la pagina del index                 
     header('Location:index.html');
 }
 $stmt->close();

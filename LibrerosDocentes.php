@@ -122,9 +122,10 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-<br><center><strong><p class='PageTitle'>Libros registrados</p></strong></center>        
-<!-- ------------------------------------------------------------------------------ -->
+<br><center><strong><p class='PageTitle'>Libros registrados</p></strong></center>
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -137,6 +138,7 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Secuencia SQL para traer los registros de la tabla books        */
     $query = "SELECT * FROM books";
 
     $result = $conexion->query($query);
@@ -147,15 +149,15 @@
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO         Barra de busqueda, php incluyendo archivo con php necesario para la busqueda             -->
     <?php include 'SearchBooks.php'; ?>
     <center><div id="Buscador">
         <form action="LibrerosDocentes.php" method="POST">
             <label class="SearchTxt" for="search">Buscar libro:</label>
             <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el titulo del libro">
             <input class="SearchBtn" type="submit" value="Buscar"></div></center>
-        </form>  
-    <!-- ------------------------------------------------------------------------------- -->
+        </form>
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -166,12 +168,10 @@
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <?php
-            $rowCount = 0;
             if ($seeing = mysqli_query($conexion, $sql_select)) {
             while ($row = mysqli_fetch_array($seeing)) {
-                $rowCount++;
-                $BCKX = $rowCount + 200;
                 echo "<tr>";
                 echo "<td>" . $row['BookCode'] . "</td>";
                 echo "<td>" . $row['Title'] . "</td>";
@@ -201,9 +201,10 @@
         </table>
     </center>
     <br>
+    <!--TODO                               Boton para ir al registro                           -->
     <center><a href="LibrerosDocentesAltas.php"><button class="LibBtnAlt">Ingresar un nuevo libro</button></a></center><br>
-    <br>
-        
-        <center><a href="Library.php"><button class="LibBtnAlt">Volver a la Biblioteca</button></a></center>
+    <br>        
+    <!--TODO                                Botones para regresar                            -->
+    <center><a href="Library.php"><button class="LibBtnAlt">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

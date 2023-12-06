@@ -78,8 +78,9 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-<!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -92,8 +93,10 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Obtenemos el codigo del registro modificandose        */
     $CodeUpdating = $_POST['BookUpdate'] ? $_POST['BookUpdate'] : 0;
 
+    /*TODO    Secuencia SQL para traer los registros de la tablas books segun el codigo modificandose    */
     $query = "SELECT * FROM books WHERE BookCode = $CodeUpdating";
 
     $result = $conexion->query($query);
@@ -109,7 +112,7 @@
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -120,6 +123,7 @@
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="LibrerosDocentesQuery.php" method="POST">
             <?php
             while ($CodeUpdating = $result->fetch_assoc()) {
@@ -138,6 +142,7 @@
         </table>
     </center>
     <br>
+    <!--TODO                                 Botones para regresar                            -->
         <center><a href="LibrerosDocentes.php"><button class="CamBtn">Modificar base de datos</button></a></center><br>
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>

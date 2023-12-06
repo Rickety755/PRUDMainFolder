@@ -1,7 +1,6 @@
+<!--TODO                                    Obtiene el valor de docente                                      -->
 <?php
 session_start();
-
-$BCKX = -400;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,9 +114,11 @@ $BCKX = -400;
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-<br><center><strong><p class='PageTitle'>Libros disponibles</p></strong></center>    
-<!-- ------------------------------------------------------------------------------ -->
+<br><center><strong><p class='PageTitle'>Libros disponibles</p></strong></center>
+
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -130,6 +131,7 @@ $BCKX = -400;
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Secuencia SQL para traer los registros de la tabla books        */
     $query = "SELECT * FROM books";
 
     $result = $conexion->query($query);
@@ -140,15 +142,15 @@ $BCKX = -400;
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO         Barra de busqueda, php incluyendo archivo con php necesario para la busqueda             -->
     <?php include 'SearchBooks.php'; ?>
     <center><div id="Buscador">
         <form action="Libreros.php" method="POST">
             <label class="SearchTxt" for="search">Buscar libro:</label>
             <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el titulo del libro">
             <input class="SearchBtn" type="submit" value="Buscar"></div></center>
-        </form>    
-    <!-- ------------------------------------------------------------------------------ -->
+        </form>
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -159,13 +161,13 @@ $BCKX = -400;
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <?php
-            $rowCount = 0;
+            /*TODO               If para comprobar si se utiliza la barra de busqueda           */
             if ($seeing = mysqli_query($conexion, $sql_select)) {
             
+                /*TODO     Crea una linea para la tabla segun cuantos registros obtuvo la secuencia SQL     */
             while ($row = mysqli_fetch_array($seeing)) {
-                $rowCount++;
-                $BCKX = $rowCount + 200;
                 echo "<tr>";
                 echo "<td>" . $row['BookCode'] . "</td>";
                 echo "<td>" . $row['Title'] . "</td>";
@@ -176,13 +178,9 @@ $BCKX = -400;
                 echo "</tr>";
             }
         } else { 
-            while ($row = $result->fetch_assoc()) {
-                $rowCount++;
-                $BCKX = $rowCount + 200;
-                echo "<style>";
-                echo "body { background-position: <?php echo $BCKX; ?>px 0px; }";
-                echo "</style>";
 
+            /*TODO          Muestreo de toda la tabla en caso de no usar la barra de busqueda        */
+            while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row['BookCode'] . "</td>";
                 echo "<td>" . $row['Title'] . "</td>";
@@ -197,9 +195,12 @@ $BCKX = -400;
         </table>
     </center>
     <br>
+    <!--TODO                                 SI el usuario es un docente                            -->
     <?php if ($_SESSION['Docente']==1) {
+        //TODO                     Boton para ir a los libreros para docentes                      
     echo "<center><a href='LibrerosDocentes.php'><button class=\'LibBtn\'>Modificar base de datos</button></a></center><br>";
     }?>
+    <!--TODO                                Botones para regresar                            -->
         <center><a href="Library.php"><button class="LibBtn">Volver a la Biblioteca</button></a></center>
         
         

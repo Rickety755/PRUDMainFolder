@@ -112,10 +112,10 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="UsrDiv1"><p class="UsrTitle">PRUD</p> <br> <p class="UsrSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ---------------------------------------------------------------------------------- -->
     <br><center><p class="UsrPageTitle">Usuarios registrados</p></center>
-    <!-- ----------------------------------------------------------------------------------- -->
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -128,6 +128,7 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Secuencia SQL para traer los registros de la tabla de users        */
     $query = "SELECT * FROM users";
 
     $result = $conexion->query($query);
@@ -138,15 +139,15 @@
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO         Barra de busqueda, php incluyendo archivo con php necesario para la busqueda             -->
     <?php include 'SearchUsers.php'; ?>
     <center><div id="Buscador">
         <form action="Users.php" method="POST">
             <label class="SearchTxt" for="search">Buscar usuario:</label>
             <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el nombre del usuario">
             <input class="SearchBtn" type="submit" value="Buscar"></div></center>
-        </form>   
-    <!-- ------------------------------------------------------------------------------- -->
+        </form>
+<!--TODO                                  Primera seccion de la tabla                                -->
     <center>
         <table class="UsrTable">
             <tr>
@@ -157,6 +158,7 @@
                 <th>Ingenieria Aplicando</th>
                 <th>Opciones</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <?php
             if ($seeing = mysqli_query($conexion, $sql_select)) {
                 while ($row = mysqli_fetch_array($seeing)) {
@@ -164,11 +166,14 @@
                 echo "<td>" . $row['UserCode'] . "</td>";
                 echo "<td>" . $row['Username'] . "</td>";
                 echo "<td>" . $row['Userpassword'] . "</td>";
+
+                 /*TODO              Convierte el boleano de Docente a un texto     */
                 if ($row['Docente']==1) {
                 echo "<td>Docente</td>";
                 } else {
                 echo "<td>Alumno</td>";
                 }
+
                 echo "<td>" . $row['IngenieriaAplicada'] . "</td>";
                 echo "<td class='UsrBtn'> <div> <form action='UsersQuery.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserEliminar'>Borrar</button> </form> 
                 <form action='UsersUpdate.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserUpdate'>Modificar</button> </form> </div></td>";
@@ -180,11 +185,14 @@
                 echo "<td>" . $row['UserCode'] . "</td>";
                 echo "<td>" . $row['Username'] . "</td>";
                 echo "<td>" . $row['Userpassword'] . "</td>";
+
+                 /*TODO              Convierte el boleano de Docente a un texto     */
                 if ($row['Docente']==1) {
                 echo "<td>Docente</td>";
                 } else {
                 echo "<td>Alumno</td>";
                 }
+
                 echo "<td>" . $row['IngenieriaAplicada'] . "</td>";
                 echo "<td class='UsrBtn'> <div> <form action='UsersQuery.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserEliminar'>Borrar</button> </form> 
             <form action='UsersUpdate.php' method='POST'> <button class='submit' value='" . $row['UserCode'] . "' name='UserUpdate'>Modificar</button> </form> </div></td>";
@@ -195,8 +203,10 @@
         </table>
     </center>
     <br>
+    <!--TODO                               Boton para ir al registro                           -->
     <center><a href="DocenteAlta.php"><button class="UsrBtnAlt">Registrar un nuevo docente</button></a></center><br>
     <br>
+    <!--TODO                                Botones para regresar                            -->
     <center><a href="Campus.php"><button class="UsrBtnAlt">Volver al campus</button></a><a href="CloseSession.php"><button class="UsrBtnAlt">Cerrar sesion</button></a></center>
 </body>
 </html>

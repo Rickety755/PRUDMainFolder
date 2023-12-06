@@ -98,7 +98,6 @@
 <body>
 <!--TODO                Aqui utilizamos una funcion con php para obtener la fecha de hoy                -->
 <?php
-// Script para obtener y mostrar la fecha actual en el documento
 function obtenerFechaActual() {
     $fecha = new DateTime();
     $dia = $fecha->format('d');
@@ -177,7 +176,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
         </table>
     </center>
     <br>
-    <!--TODO                                Botones para regresar                            -->
+    <!--TODO                                 Botones para regresar                            -->
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

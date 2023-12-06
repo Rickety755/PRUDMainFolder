@@ -21,81 +21,66 @@ if ($conexion_insert->connect_error) {
 }
 
 
-
-
-
-/* --------------------------------------------If se esta eliminando--------------------------------------- */
-
+//TODO                                SI es que se esta eliminando                                             
 if (isset($_POST["UserEliminar"])) {
-    // Obtener el código del producto a eliminar
+
+    //TODO                Obtenemos el codigo del registro a eliminar                    
     $UserCode = $_POST['UserEliminar'];
 
-    // Consulta SQL para eliminar el registro de manera segura
+    //TODO                 Consulta delete              
     $deleteQuery = "DELETE FROM users WHERE UserCode = ?";
 
-    // Preparar la consulta
     $consulta_delete = $conexion_delete->prepare($deleteQuery);
 
-    // Vincular el valor del código del producto
+    //TODO   Conecta aquellos campos no especificados de la consulta(= ?) con las variables     
     $consulta_delete->bind_param("s", $UserCode);
 
-    // Ejecutar la consulta
     if ($consulta_delete->execute()) {
-        // Registro eliminado con éxito, redirigir a la página deseada
+        //TODO              Nos dirige de nuevo a la pagina con la tabla                 
         header("Location: Users.php");
     }
 
-    // Cerrar la declaración
     $consulta_delete->close();
 }
 
 
-
-
-
-
-
-/* --------------------------------If se esta actualizando--------------------------------------------- */
-//TODO boleano
+//TODO                               SI es que se esta actualizando                                          
 if (isset($_POST["UserUpdated"])) {
-    // Obtener el código del producto a actualizar
+
+    //TODO                Obtenemos el codigo del registro a actualizar                    
     $UserCode = $_POST['UserUpdated'];
 
-
+    //TODO                SI se seleciono docente el boleano sera 1                        
     if ($_POST['Docente']==="Docente") {
         $Docente = 1;
     } else {
         $Docente = 0;
     }
 
-    // Consulta SQL para actualizar el registro
+    //TODO             Consulta update             
     $updateQuery =  "UPDATE users
     SET Username  = ?, Userpassword = ?, Docente = ?, IngenieriaAplicada = ?
     WHERE UserCode = ?";
 
-    // Preparar la consulta
     $consulta_update = $conexion_update->prepare($updateQuery);
 
-    // Vincular los valores a los parámetros de la consulta
+    //TODO       Conecta aquellos campos no especificados de la consulta(= ?) con las variables   
     $consulta_update->bind_param("sssss", $_POST['Username'], $_POST['Userpassword'], $Docente, $_POST['IngenieriaAplicada'], $UserCode);
 
-    // Ejecutar la consulta
     if ($consulta_update->execute()) {
-        // Registro actualizado con éxito, redirigir a la página deseada
+        //TODO              Nos dirige de nuevo a la pagina con la tabla                 
         header("Location: Users.php");
     }
 
-    // Cerrar la declaración
     $consulta_update->close();
 }
 
 
 
-
-/* --------------------------------------If se esta registrando------------------------------------------- */
-
+//TODO                                SI es que se esta registrando                                     
 if (isset($_POST["send"])) {
     
+    //TODO            Les damos valores a las variables              
     $Username = $_POST['Username'];
     $Userpassword = $_POST['Userpassword'];
     $IngenieriaAplicada = $_POST['IngenieriaAplicada'];
@@ -103,23 +88,20 @@ if (isset($_POST["send"])) {
     $Docente = 1;
 
 
-    // Consulta SQL para eliminar el registro de manera segura
+    //TODO             Consulta insert                    
     $insertQuery = "INSERT INTO users (`Username`,`Userpassword`,`Docente`,`IngenieriaAplicada`)
     VALUES (?, ?, ?, ?)";
 
-    // Preparar la consulta
     $consulta_insert = $conexion_insert->prepare($insertQuery);
 
-    // Vincular el valor del código del producto
+    //TODO       Conecta aquellos campos no especificados de la consulta(= ?) con las variables   
     $consulta_insert->bind_param("ssss", $Username, $Userpassword, $Docente, $IngenieriaAplicada);
     
-    // Ejecutar la consulta
     if ($consulta_insert->execute()) {
-        // Registro eliminado con éxito, puedes redirigir a la página deseada
+        //TODO              Nos dirige de nuevo a la pagina con la tabla                 
         header("Location: Users.php");
     }
 
-    // Cerrar la declaración
     $consulta_insert->close();
 }
 ?>

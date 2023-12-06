@@ -72,8 +72,9 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="IngDiv1"><p class="IngTitle">PRUD</p> <br> <p class="IngSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ----------------------------------------------------------------------------------- -->
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -87,6 +88,7 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Secuencia SQL para traer los registros de la tabla de ingenierias        */
     $query = "SELECT * FROM ingenierias";
 
     $result = $conexion->query($query);
@@ -97,7 +99,7 @@
 
     $conexion->close();
     ?>
-<!-- ------------------------------------------------------------------------------------------------- -->
+<!--TODO                    Inicio y cierre de tabla, una tabla por cada ingenieria                      -->
 <?php
     while ($row = $result->fetch_assoc()) {
     echo "<table>";
@@ -108,6 +110,7 @@
     echo "</table>";
     echo "<br>";
     }?>
+    <!--TODO                                Botones para regresar                            -->
     <center><a href="Campus.php"><button class="IngBtnAlt">Volver a el campus</button></a><a href="CloseSession.php"><button class="IngBtnAlt">Cerrar sesion</button></a></center>
 </body>
 </html>

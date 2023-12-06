@@ -98,9 +98,10 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-<br><center><strong><p class='PageTitle'></p></strong></center>        
-<!-- ------------------------------------------------------------------------------ -->
+<br><center><strong><p class='PageTitle'></p></strong></center>
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -113,8 +114,10 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Obtenemos el codigo del registro modificandose        */
     $CodeUpdating = $_POST['BorrowUpdate'] ? $_POST['BorrowUpdate'] : 0;
 
+    /*TODO        Secuencias SQL para traer los registros de las tablas users, books y borrows        */
     $query = "SELECT * FROM borrows WHERE BorrowCode = $CodeUpdating";
     $query2 = "SELECT * FROM users";
     $query3 = "SELECT * FROM books";
@@ -134,13 +137,14 @@
         die("Query failed: " . $conexion->error);
     }
 
+    /*TODO        Titulo extra de la pagina        */
     while ($CodeUpdating = $result4->fetch_assoc()) {
         echo "<br><center><strong><p class='PageTitle'>Actualizando pestamo no.". $CodeUpdating['BorrowCode'] ."</p></strong></center>";
         }
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -151,18 +155,21 @@
                 <th>Dias para entregar</th>
                 <th>Entregado</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="BorrowsQuery.php" method="POST">
             <?php
             while ($CodeUpdating = $result->fetch_assoc()) {
                 echo "<tr>";
                     echo "<td style='text-align: center;'>" . $CodeUpdating['BorrowCode'] . "</td>";
 
+                    /*TODO             Trae de la base de datos todos los usuarios          */
                     echo "<td><select class='LibInput' name='UserBorrowed' id='UserBorrowed'>"; 
                     while ($row = $result2->fetch_assoc()) { 
                         echo "<option value='". $row['Username'] ."'>". $row['Username'] ."</option>"; 
                     } 
                     echo "</select></td>";
 
+                    /*TODO              Trae de la base de datos todos los libros  */
                     echo "<td><select class='LibInput' name='BookBorrowed' id='BookBorrowed'>"; 
                     while ($row = $result3->fetch_assoc()) { 
                         echo "<option value='". $row['BookCode'] ."'>". $row['BookCode'] ."</option>"; 
@@ -185,9 +192,8 @@
         </table>
     </center>
     
-        
-    
     <br>
+    <!--TODO                                 Botones para regresar                            -->
         <center><a href="Borrows.php"><button class="CamBtn">Modificar base de datos</button></a></center><br>
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>

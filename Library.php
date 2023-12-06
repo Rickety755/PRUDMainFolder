@@ -1,3 +1,4 @@
+<!--TODO                                    Obtiene el valor de docente                                      -->
 <?php
 session_start();
 ?>
@@ -84,16 +85,26 @@ session_start();
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
     <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
     
+<!--TODO                                          Cuadro del menu                                        -->
     <div class="LibDiv2"><br>
     <center><p class="LibGeneralTxt">Bienvenido! Que necesitas?</p><br></center>
+
+    <!--TODO                               Boton para ir a los libreros                           -->
     <center><a href="Libreros.php"><button class="LibBtn">Explorar los libreros</button></a></center>
+    
+    <!--TODO                                 SI el usuario es un docente                            -->
     <?php if ($_SESSION['Docente']==1) {
+        //TODO                             Boton para ir a los prestamos                               
     echo "<center><a href='Borrows.php'><button class='LibBtn'>Libros en prestamo</button></a></center>"; 
     }?>
-    <center><a href="BorrowsAltas.php"><button class="LibBtn">Acercarte a la recepcion</button></a></center><!-- then you can ask by a highht of an book to borrow or delete an deliver an borrowed book by an input and it will delete only that one -->
+
+    <!--TODO                               Boton para ir a lo recepcion                           -->
+    <center><a href="BorrowsAltas.php"><button class="LibBtn">Acercarte a la recepcion</button></a></center>
     <br><br>
+    <!--TODO                                Botones para regresar                            -->
     <center><a href="Campus.php"><button class="LibBtnAlt">Volver a el campus</button></a><a href="CloseSession.php"><button class="LibBtnAlt">Cerrar sesion</button></a></center>
 </div>
 </body>

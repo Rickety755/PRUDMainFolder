@@ -83,10 +83,10 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="UsrDiv1"><p class="UsrTitle">PRUD</p> <br> <p class="UsrSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ---------------------------------------------------------------------------------- -->
-    <br><center><p class="UsrPageTitle">Usuarios registrados</p></center>
-    <!-- ----------------------------------------------------------------------------------- -->
+<br><center><p class="UsrPageTitle">Usuarios registrados</p></center>
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -98,6 +98,7 @@
     if ($conexion->connect_error) {
         die("Connection failed: " . $conexion->connect_error);
     }
+    /*TODO        Secuencias SQL para traer los registros de la tabla ingenierias        */
     $query = "SELECT * FROM ingenierias";
 
     $result = $conexion->query($query);
@@ -108,7 +109,7 @@
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                  Primera seccion de la tabla                                -->
     <center>
         <table class="UsrTable">
             <tr>
@@ -116,11 +117,13 @@
                 <th>Contraseña</th>
                 <th>Clase de ingenieria</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="UsersQuery.php" method="POST"><?php
                 echo "<tr>";
                 echo "<td><input class='UsrInput' type='text' id='Username' name='Username' required></td>";
                 echo "<td><input class='UsrInput' type='text' id='Userpassword' name='Userpassword' required></td>";
                 
+                    /*TODO             Trae de la base de datos todas las ingenierias          */
                 echo "<td><select class='UsrInput' name='IngenieriaAplicada' id='IngenieriaAplicada'>"; 
                 while ($row = $result->fetch_assoc()) { 
                     echo "<option value='". $row['IngName'] ."'>". $row['IngName'] ."</option>"; 
@@ -133,6 +136,7 @@
         </table>
     </center>
     <br>
+    <!--TODO                                 Botones para regresar                            -->
     <center><a href="Users.php"><button class="UsrBtnAlt">Volver a la base de datos</button></a><a href="CloseSession.php"><button class="UsrBtnAlt">Cerrar sesion</button></a></center>
 </body>
 </html>

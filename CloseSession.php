@@ -1,11 +1,11 @@
+<!--TODO                                    Obtiene el valor de docente                                      -->
 <?php
 session_start();
 
-// Destruir todas las variables de sesión
+//TODO       Vacia el array de SESSION          
 $_SESSION = array();
 
-// Si se desea destruir la sesión, también debe eliminar la cookie de sesión.
-// Nota: Esto destruirá la sesión y no afectará a otras cookies.
+//TODO            Eliminamos las cookies de el inicio de sesion                
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -14,9 +14,10 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Finalmente, destruir la sesión.
+//TODO          Cierre de sesion         
 session_destroy();
 
-// Redirigir a la página de inicio después de cerrar sesión
+
+//TODO              Nos dirige de nuevo a la pagina del index                 
 header("Location: index.html");
 ?>

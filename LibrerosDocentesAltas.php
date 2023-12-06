@@ -78,9 +78,10 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
-<br><center><strong><p class='PageTitle'>Ingresando nuevo libro</p></strong></center>    
-<!-- ------------------------------------------------------------------------------------------------- -->
+<br><center><strong><p class='PageTitle'>Ingresando nuevo libro</p></strong></center>
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -90,6 +91,7 @@
                 <th>Codigo de ejemplar</th>
                 <th>Numero de volumen</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="LibrerosDocentesQuery.php" method="POST"><?php
             echo "<tr>";
             echo "<td><input class='LibInput' type='text' id='Title' name='Title' required></td>";
@@ -103,6 +105,7 @@
         </table>
     </center>
     <br>
+    <!--TODO                                 Botones para regresar                            -->
         <center><a href="LibrerosDocentes.php"><button class="CamBtn">Modificar base de datos</button></a></center><br>
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>

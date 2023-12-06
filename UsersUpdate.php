@@ -83,8 +83,9 @@
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="UsrDiv1"><p class="UsrTitle">PRUD</p> <br> <p class="UsrSubTitle">Project Rickety's University D</p></div></center>
-    <!-- ----------------------------------------------------------------------------------- -->
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -98,8 +99,10 @@
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO        Obtenemos el codigo del registro modificandose        */
     $CodeUpdating = $_POST['UserUpdate'] ? $_POST['UserUpdate'] : 0;
 
+    /*TODO        Secuencias SQL para traer los registros de las tablas users y ingenierias      */
     $query = "SELECT * FROM users WHERE UserCode = $CodeUpdating";
     $query2 = "SELECT * FROM ingenierias";
 
@@ -114,13 +117,14 @@
         die("Query failed: " . $conexion->error);
     }
 
+    /*TODO        Titulo extra de la pagina        */
     while ($CodeUpdating = $result3->fetch_assoc()) {
     echo "<br><center><strong><p class='UsrPageTitle'>Actualizando usuario no.". $CodeUpdating['UserCode'] ."</p></strong></center>";
     }
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                  Primera seccion de la tabla                                -->
     <center>
         <table class="UsrTable">
             <tr>
@@ -131,6 +135,7 @@
                 <th>Ingenieria Aplicando</th>
                 <th>Opciones</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="UsersQuery.php" method="POST">
             <?php
             while ($CodeUpdating = $result->fetch_assoc()) {
@@ -145,6 +150,7 @@
                 echo "<option value='Alumno'>Alumno</option>"; 
                 echo "</select></td>";
                 
+                    /*TODO              Trae de la base de datos todas las ingenierias     */
                 echo "<td><select class='UsrInput' name='IngenieriaAplicada' id='IngenieriaAplicada'>"; 
                 while ($row2 = $result2->fetch_assoc()) { 
                     echo "<option value='". $row2['IngName'] ."'>". $row2['IngName'] ."</option>"; 
@@ -159,6 +165,7 @@
         </table>
     </center>
     <br>
+    <!--TODO                                 Botones para regresar                            -->
     <center><a href="Users.php"><button class="UsrBtnAlt">Volver a la base de datos</button></a><a href="CloseSession.php"><button class="UsrBtnAlt">Cerrar sesion</button></a></center>
 </body>
 </html>

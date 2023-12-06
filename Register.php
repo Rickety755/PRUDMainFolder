@@ -114,6 +114,7 @@
 
 </head>
 <body>
+<!--TODO                                    Conexion a base de datos                                      -->
 <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -125,6 +126,8 @@
     if ($conexion->connect_error) {
         die("Connection failed: " . $conexion->connect_error);
     }
+
+    /*TODO        Secuencias SQL para traer los registros de la tabla ingenierias        */
     $query = "SELECT * FROM ingenierias";
 
     $result = $conexion->query($query);
@@ -135,9 +138,10 @@
 
     $conexion->close();
     ?>
-<!-- ------------------------------------------------------------------------------------- -->
+<!--TODO                                       Titlulos de la pagina                                      -->
     <center><div class="IdxDiv1"><p class="IdxTitle">PRUD</p></div></center>
 
+<!--TODO                                       Ingreso de el nombre                                -->
     <center><form action="RegisterQuery.php" method="POST">
     <p>Bienvenido a PRUD!</p>
     <p>Cual sera el nombre de tu usuario?</p>
@@ -145,12 +149,16 @@
 
     <br>
 
+<!--TODO                                       Ingreso de la contraseña                                -->
     <p>Cual sera tu contraseña?</p>
     <input class="RegInput" type="password" placeholder="Contraseña" name="Userpassword" id="Userpassword" required> 
     
-    <br><p>Y a que ingenieria estas ingresando?</p>
+<!--TODO                                       Ingreso de la ingenieria                                -->
+<br><p>Y a que ingenieria estas ingresando?</p>
     <?php
-    echo "<td><select class='RegInputAlt' name='IngenieriaAplicada' id='IngenieriaAplicada'>"; 
+    echo "<td><select class='RegInputAlt' name='IngenieriaAplicada' id='IngenieriaAplicada'>";
+
+     /*TODO              Trae de la base de datos todos las ingenierias  */
     while ($row = $result->fetch_assoc()) { 
         echo "<option value='". $row['IngName'] ."'>". $row['IngName'] ."</option>"; 
     } 
@@ -162,28 +170,8 @@
 
 
     </form><br>
+    <!--TODO                                 Boton para volver                            -->
     <center><a href="Index.html"><button class="IdxBtn">Ya tenias un usuario? Vuelve al inicio por aqui!</button></a></center>
 </center>
-    
-<script>
-    const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function () {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-            
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
-
-        // prevent form submit
-        const form = document.querySelector("form");
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-        });
-</script>
-
 </body>
 </html>

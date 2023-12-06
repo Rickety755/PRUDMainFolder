@@ -179,6 +179,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
             <?php
             /*TODO               If para comprobar si se utiliza la barra de busqueda           */
             if ($seeing = mysqli_query($conexion, $sql_select)) {
+
                 /*TODO     Crea una linea para la tabla segun cuantos registros obtuvo la secuencia SQL     */
             while ($row = mysqli_fetch_array($seeing)) {
                 echo "<tr>";
@@ -187,6 +188,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 echo "<td>" . $row['BorrowTimeDays'] . "</td>";
                 echo "<td>" . $row['UserBorrowed'] . "</td>";
                 echo "<td>" . $row['BookBorrowed'] . "</td>";
+
                 /*TODO          Transformacion de boleano a texto          */
                 if ($row['Delivered']<1) {
                     echo "<td>No</td>";
@@ -199,6 +201,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 echo "</tr>";
             }
         }    else {
+            
             /*TODO          Muestreo de toda la tabla en caso de no usar la barra de busqueda        */
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";

@@ -1,3 +1,4 @@
+<!--TODO                                    Obtiene el valor de docente                                      -->
 <?php
 session_start();
 ?>
@@ -83,20 +84,27 @@ session_start();
     </style>
 </head>
 <body>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="CamDiv1"><p class="CamTitle">PRUD</p> <br> <p class="CamSubTitle">Project Rickety's University D</p></div></center>
 
-
+<!--TODO                                          Cuadro del menu                                        -->
 <div class="CamDiv2"><br>
     <center><p class="CamGeneralTxt">A donde quieres ir?</p><br></center>
     
+    <!--TODO                               Boton para ir a la biblioteca                           -->
     <center><a href="Library.php"><button class="CamBtn">Ir a la Biblioteca</button></a></center>
     
-    <center><a href="Ingenierias.php"><button class="CamBtn">Ir a las ingenierias</button></a></center><!-- a page with info about the ingenierias and his description {a mas informacion button} --> 
+    <!--TODO                               Boton para ir a las ingenierias                           -->
+    <center><a href="Ingenierias.php"><button class="CamBtn">Ir a las ingenierias</button></a></center>
     
+
+    <!--TODO                                 SI el usuario es un docente                            -->
     <?php if ($_SESSION['Docente']==1) {
+        //TODO                             Boton para ir a los usuarios                               
     echo "<center><a href='Users.php'><button class='CamBtn'>Ver los usuarios</button></a></center>"; 
-    }?><!-- a database of the alumns this is only visible to docentes and they only can modificy them {provisional} -->
+    }?>
     
+    <!--TODO                                Botones para regresar                            -->
     <br><center><a href="CloseSession.php"><button class="CamBtnAlt">Cerrar sesion</button></a></center>
 </div>
 

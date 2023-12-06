@@ -100,12 +100,13 @@
 
 </head>
 <body><br>
+<!--TODO                                       Titlulos de la pagina                                      -->
     <center><div class="IdxDiv1"><p class="IdxTitle">PRUD</p></div></center>
 
+<!--TODO                                 Form y cuadro de el inicio de sesion                                        -->
     <center><form action="Verify.php" method="POST">
     <p>Bienvenido de nuevo!</p>
     <p>Cual es el nombre de tu usuario?</p>
-
     <input type="text" placeholder="Usuario" name="userinput" id="userinput" required>
 
     <br>
@@ -116,40 +117,43 @@
     <button type="button" class="IdxBtn" id="submitButton">Confirmar</button>
     
     </form><br>
+    <!--TODO                               Boton para ir al registro                           -->
     <center><a href="Register.php"><button class="IdxBtn">No tienes un usuario? Registrate aqui!</button></a></center>
 </center>
 
     <script>
+        //TODO     Variables para el funcionamiento de los botones confirmar y alternar visibilidad      
     const togglePassword = document.querySelector("#togglePassword");
     const password = document.querySelector("#passinput");
     const submitButton = document.querySelector("#submitButton");
 
+        //TODO                  SI se le da click al boton de la contraseña                 
     togglePassword.addEventListener("click", function () {
+        //TODO                  Se alterna el type del campo de la contraseña               
         const type = password.getAttribute("type") === "password" ? "text" : "password";
         password.setAttribute("type", type);
         this.classList.toggle("bi-eye");
     });
 
-    // Handle button click instead of form submit
+        //TODO                  SI se le da click al boton de confirmar                      
     submitButton.addEventListener("click", function () {
-        // Your existing form validation logic goes here
+            //TODO         Obtenemos el valos de los campos          
         const userinput = document.querySelector("#userinput").value;
         const passinput = document.querySelector("#passinput").value;
 
-        // Example validation, modify as needed
         if (userinput && passinput) {
-            // Perform any additional validation or AJAX calls if needed
 
-            // Your existing prevent form submit logic
+            //TODO       Variable y declaracion necesaria para el submit        
             const form = document.querySelector("form");
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
             });
 
-            // Submit the form programmatically
+            //TODO                 Ejecutamos el form                
             form.submit();
         } else {
-            alert("Please fill in both username and password fields.");
+            //TODO          SI los campos estan vacios, le pedimos al usuario que los llene            
+            alert("Porfavor llena los campos vacios.");
         }
     });
     </script>
