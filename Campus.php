@@ -97,7 +97,7 @@ session_start();
     echo "<center><a href='Users.php'><button class='CamBtn'>Ver los usuarios</button></a></center>"; 
     }?><!-- a database of the alumns this is only visible to docentes and they only can modificy them {provisional} -->
     
-    <br><center><a href="Campus.php"><button class="CamBtnAlt">Volver a el campus</button></a><a href="CloseSession.php"><button class="CamBtnAlt">Cerrar sesion</button></a></center>
+    <br><center><a href="CloseSession.php"><button class="CamBtnAlt">Cerrar sesion</button></a></center>
 </div>
 
 </body>

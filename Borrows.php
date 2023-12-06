@@ -117,8 +117,8 @@
     </style>
 </head>
 <body>
+<!--TODO                Aqui utilizamos una funcion con php para obtener la fecha de hoy                -->
 <?php
-// Script para obtener y mostrar la fecha actual en el documento
 function obtenerFechaActual() {
     $fecha = new DateTime();
     $dia = $fecha->format('d');
@@ -129,9 +129,10 @@ function obtenerFechaActual() {
 
 echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
 ?>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
 <br><center><strong><p class='PageTitle'>Prestamos registrados</p></strong></center>    
-<!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                    Conexion a base de datos                                      -->
     <?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
@@ -144,6 +145,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
         die("Connection failed: " . $conexion->connect_error);
     }
 
+    /*TODO                  Especificamos la secuencia SQL                                 */
     $query = "SELECT * FROM borrows";
 
     $result = $conexion->query($query);
@@ -154,7 +156,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------------------------ -->
+<!--TODO         Barra de busqueda, php incluyendo archivo con php necesario para la busqueda             -->
     <?php include 'SearchBorrows.php'; ?>
     <center><div id="Buscador">
         <form action="Borrows.php" method="POST">
@@ -162,7 +164,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
             <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el nombre del usuario">
             <input class="SearchBtn" type="submit" value="Buscar"></div></center>
         </form>  
-    <!-- ------------------------------------------------------------------------------------------------- -->
+<!--TODO                                  Primera seccion de la tabla                                -->
     <center>
         <table class="LibTable">
             <tr>
@@ -173,8 +175,11 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 <th>Codigo de libro</th>
                 <th>Entregado</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <?php
+            /*TODO               If para comprobar si se utiliza la barra de busqueda           */
             if ($seeing = mysqli_query($conexion, $sql_select)) {
+                /*TODO     Crea una linea para la tabla segun cuantos registros obtuvo la secuencia SQL     */
             while ($row = mysqli_fetch_array($seeing)) {
                 echo "<tr>";
                 echo "<td>" . $row['BorrowCode'] . "</td>";
@@ -182,17 +187,19 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 echo "<td>" . $row['BorrowTimeDays'] . "</td>";
                 echo "<td>" . $row['UserBorrowed'] . "</td>";
                 echo "<td>" . $row['BookBorrowed'] . "</td>";
+                /*TODO          Transformacion de boleano a texto          */
                 if ($row['Delivered']<1) {
                     echo "<td>No</td>";
                 } else {
                     echo "<td>Si</td>";
                 } 
-                /*echo "<td>" . $row['Delivered'] . "</td>";*/
+                /*TODO           Botones de opcion para los registros         */
                 echo "<td class='LibBtn'> <div> <form action='BorrowsQuery.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowEliminar'>Borrar</button> </form> 
                 <form action='BorrowsUpdate.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
             }
         }    else {
+            /*TODO          Muestreo de toda la tabla en caso de no usar la barra de busqueda        */
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row['BorrowCode'] . "</td>";
@@ -205,7 +212,6 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 } else {
                     echo "<td>Si</td>";
                 } 
-                /*echo "<td>" . $row['Delivered'] . "</td>";*/
                 echo "<td class='LibBtn'> <div> <form action='BorrowsQuery.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowEliminar'>Borrar</button> </form> 
                 <form action='BorrowsUpdate.php' method='POST'> <button class='submit' value='" . $row['BorrowCode'] . "' name='BorrowUpdate'>Modificar</button> </form> </div></td>";
                 echo "</tr>";
@@ -214,10 +220,11 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
             ?>
         </table>
     </center>
-
     <br>
+    <!--TODO                               Boton para ir al registro                           -->
     <center><a href="BorrowsAltas.php"><button class="CamBtn">Ingresar un nuevo prestamo</button></a></center><br>
     <br>
+    <!--TODO                                Botones para regresar                            -->
     <center><a href="Library.php"><button class="LibBtnAlt">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

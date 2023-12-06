@@ -67,3 +67,6 @@ hola! puedes hacerme una imagen de una aula universitaria moderna del tamaño de
 retry because the see thing in the page was not setted
 
 podria de hecho meter en las query.php pages the search php pages
+
+quitar inecesarios y usar y modificar todo para que solo se escriba cual pagina es y los comentarios todo
+lo expliquen

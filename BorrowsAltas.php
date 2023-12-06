@@ -96,6 +96,7 @@
     </style>
 </head>
 <body>
+<!--TODO                Aqui utilizamos una funcion con php para obtener la fecha de hoy                -->
 <?php
 // Script para obtener y mostrar la fecha actual en el documento
 function obtenerFechaActual() {
@@ -108,10 +109,11 @@ function obtenerFechaActual() {
 
 echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
 ?>
+<!--TODO                                       Titlulos de la pagina                                      -->
 <center><div class="LibDiv1"><p class="LibTitle">PRUD</p> <br> <p class="LibSubTitle">Project Rickety's University D</p></div></center>
 <br><center><strong><p class='PageTitle'>Registrando un prestamo</p></strong></center>    
-<!-- ------------------------------------------------------------------------------------------------- -->
-    <?php
+<!--TODO                                    Conexion a base de datos                                      -->
+<?php
     $DATABASE_HOST = "localhost";
     $DATABASE_USER = "root";
     $DATABASE_PASS = "";
@@ -122,6 +124,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
     if ($conexion->connect_error) {
         die("Connection failed: " . $conexion->connect_error);
     }
+    /*TODO        Secuencias SQL para traer los registros de las tablas users y books        */
     $query2 = "SELECT * FROM users";
     $query3 = "SELECT * FROM books";
 
@@ -137,7 +140,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
 
     $conexion->close();
     ?>
-    <!-- ------------------------------------------------------------------------------ -->
+<!--TODO                                  Primera seccion de la tabla                                -->
 <center>
         <table class="LibTable">
             <tr>
@@ -146,15 +149,17 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
                 <th>Fecha de salida</th>
                 <th>Dias para entregar</th>
             </tr>
+<!--TODO                                Segunda seccion de la tabla                                  -->
             <form action="BorrowsQuery.php" method="POST"><?php
                 echo "<tr>";
                     echo "<td><select class='LibInput' name='UserBorrowed' id='UserBorrowed'>"; 
 
+                    /*TODO             Trae de la base de datos todos los usuarios          */
                     while ($row = $result2->fetch_assoc()) { 
                         echo "<option value='". $row['Username'] ."'>". $row['Username'] ."</option>"; 
                     } 
                     echo "</select></td>";
-
+                    /*TODO              Trae de la base de datos todos los libros  */
                     echo "<td><select class='LibInput' name='BookBorrowed' id='BookBorrowed'>"; 
                     while ($row = $result3->fetch_assoc()) { 
                         echo "<option value='". $row['BookCode'] ."'>". $row['BookCode'] ."</option>"; 
@@ -172,6 +177,7 @@ echo "<p class='LibDate'>". obtenerFechaActual() ."</p>";
         </table>
     </center>
     <br>
+    <!--TODO                                Botones para regresar                            -->
         <center><a href="Library.php"><button class="CamBtn">Volver a la Biblioteca</button></a></center>
 </body>
 </html>

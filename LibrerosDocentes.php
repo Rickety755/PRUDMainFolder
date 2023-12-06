@@ -152,7 +152,7 @@
     <center><div id="Buscador">
         <form action="LibrerosDocentes.php" method="POST">
             <label class="SearchTxt" for="search">Buscar libro:</label>
-            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el folio del libro">
+            <input class="SearchBar" type="text" id="search" name="search" placeholder="Ingrese el titulo del libro">
             <input class="SearchBtn" type="submit" value="Buscar"></div></center>
         </form>  
     <!-- ------------------------------------------------------------------------------- -->
