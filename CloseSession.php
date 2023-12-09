@@ -14,7 +14,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-//TODO          Cierre de sesion         
+//TODO          Cierre de sesion                         
 session_destroy();
 
 
